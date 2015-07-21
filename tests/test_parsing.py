@@ -68,6 +68,7 @@ class IWListParserTest(TestCase):
 class ScanningTest(TestCase):
     def test_scanning(self):
         self.assertRaises(InterfaceError, Cell.all, 'fake-interface')
+        self.assertRaises(InterfaceError, Cell.all, 'fake-interface', sudo=True)
 
 
 IWLIST_SCAN_NO_ENCRYPTION = """Cell 02 - Address: 38:83:45:CC:58:74
@@ -278,3 +279,4 @@ ABSOLUTE_QUALITY = """Cell 04 - Address: 50:06:04:C3:4D:93
                     Encryption key:off
                     Bit Rates:144 Mb/s
 """
+
