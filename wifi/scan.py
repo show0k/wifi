@@ -30,12 +30,15 @@ class Cell(object):
         return 'Cell(ssid={ssid})'.format(**vars(self))
 
     @classmethod
-    def all(cls, interface):
+    def all(cls, interface, sudo=False):
         """
         Returns a list of all cells extracted from the output of iwlist.
         """
+        args = ['/sbin/iwlist', interface, 'scan']
+        if sudo:
+            args.insert(0, 'sudo')
         try:
-            iwlist_scan = subprocess.check_output(['/sbin/iwlist', interface, 'scan'],
+            iwlist_scan = subprocess.check_output(args,
                                                   stderr=subprocess.STDOUT)
         except subprocess.CalledProcessError as e:
             raise InterfaceError(e.output.strip())
@@ -169,3 +172,4 @@ def normalize(cell_block):
         cell.encryption_type = 'wep'
 
     return cell
+

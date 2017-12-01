@@ -6,6 +6,8 @@ python:
 # command to install dependencies
 before_install:
   - sudo apt-get install wireless-tools
+  - sudo pip install -U pip wheel setuptools
+  - sudo pip install -U mock
 install:
   - sudo python setup.py -q install
 # command to run tests
